@@ -1,0 +1,11 @@
+PipPIM
+
+To often have I seen great applications not use standard file formats. A primary example is remind, which is used by many. It has it's own file format instead of using the iCal specification. PipPIM is a ruby based PIM designed to fill in perceived gaps in the Linux PIM 'industry'.
+
+Planned Features:
+Online Synchronization
+NCurses interface(s)
+
+
+Structure:
+cal/ - This contains a ruby clone of UNIX cal. It comes in two parts - a client and server. See the README inside for more info.
