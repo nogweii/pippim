@@ -8,8 +8,13 @@ require 'facets/ansicode'
 require 'drb'
 require 'pp'
 
+unless File.exists?(druby = File.join("#{ENV['HOME']}", ".config", "pippim", "druby"))
+	puts "Start the PipPIM server before running this application!"
+	exit 1
+end
+
 DRb.start_service
-dates = DRbObject.new nil, ARGV.shift
+dates = DRbObject.new nil, File.readlines(druby).first
 
 now   = Time.now
 month = now.month
