@@ -4,6 +4,7 @@ Summary: Doctors appointment
 Occurs: until next month
 Frequency: daily
 URL: http://www.example.com
-Location: 
+Categories: appointments food
+Location: 123 Main Street, Doctor's Office
 ---
 Description of the appointment
