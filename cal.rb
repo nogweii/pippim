@@ -1,6 +1,17 @@
 #!/usr/bin/ruby
 
-# Finally! The culmination of all my work on VPIM, ical, DRb and cal-clones combined!
+if ARGV[0] == "-n"
+	# parse_event code
+elsif %w[-help --help -h -?].include? ARGV[0]
+	puts <<EOHELP
+#{$0} version 0.2
+A PipPIM DRb calendar client
+USAGE: #{$0} [-n] [-h|--help]
+	-h,--help	Display this message
+	-n		Create a new event
+EOHELP
+	exit 1
+end
 
 #require 'rubygems'
 #require 'vpim/repo'
