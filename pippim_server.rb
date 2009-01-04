@@ -17,11 +17,6 @@ Dir["calendars/*"].each do |calfile|
 		end
 	end
 end
-#vrd.each do |cal|
-#	cal.events do |event|
-#		events << event
-#	end if cal.displayed # Better method name would've been 'displayed?'
-#end
 today = Date.today
 events = events.map{|event| event.dtend.day if event.dtend and event.dtend.month == today.month }.select {|days| not days.nil? }.sort.uniq
 
