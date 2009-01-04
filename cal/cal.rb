@@ -4,6 +4,7 @@
 
 #require 'rubygems'
 #require 'vpim/repo'
+require 'date'
 require 'facets/ansicode'
 require 'drb'
 require 'pp'
@@ -27,5 +28,6 @@ dates.each do |date|
 	view.sub!(/#{date}/, ANSICode.red(date.to_s))
 end
 
-puts now.strftime("%B %Y").center(20), "So Mo Di Mi Do Fr Sa", view
+# wdays = Date::DAYNAMES.map{ |day| day[0..1] }.join(" ")
+puts now.strftime("%B %Y").center(20), "Su Mo Tu We Th Fr Sa", view
 
