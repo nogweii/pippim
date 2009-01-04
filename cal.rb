@@ -25,7 +25,7 @@ str   = "   "*((stop.wday-stop.day+1)%7)+" 1  2  3  4  5  6  7  8  9 10 11 12 13
 view  = str.gsub(/(.{20})./, "\\1\n")
 # sub vs gsub: sub only does the first (rather than all), thus we require a
 # sorted array to prevent the wrong numbers from being highlighted
-view.sub!(/#{now.strftime("%e")}/, ANSICode.red(now.strftime('%e')))
+view.sub!(/#{now.strftime("%e")}/, ANSICode.negative(now.strftime('%e')))
 dates.each do |date|
 	if date < 10
 		view.sub!(/ #{date}/, ANSICode.red(" #{date}"))
