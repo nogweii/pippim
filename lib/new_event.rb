@@ -43,7 +43,6 @@ meta.each do |ary|
 		end
 		ary[1] = Date.parse(ary[1].to_s)
 		ary[0] = "dtend" # dtstart? Which?!?
-		pp ary
 	end
 	event.method(ary[0]).call(ary[1])
 end

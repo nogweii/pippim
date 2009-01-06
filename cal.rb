@@ -1,7 +1,8 @@
 #!/usr/bin/ruby
 
 if ARGV[0] == "-n"
-	# parse_event code
+	# Automatically starts due to no __FILE__ == $0 check
+	require 'lib/new_event'
 elsif %w[-help --help -h -?].include? ARGV[0]
 	puts <<EOHELP
 #{$0} version 0.2
