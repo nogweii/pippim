@@ -2,15 +2,14 @@
 
 require 'rubygems'
 require 'icalendar'
-#require 'vpim/repo'
+require 'lib/yaml'
 
-unless File.exists?(conf_dir = File.join("#{ENV['HOME']}", ".config", "pippim"))
-	puts "making dir..."
-	Dir.mkdir conf_dir
+unless File.exists?(File.config_path("config"))
+	puts "Please run `rake setup' before running this!"
 end
 
 events = []
-Dir["calendars/*"].each do |calfile|
+Dir[File.config_path("calendars")].each do |calfile|
 	Icalendar.parse(File.read(calfile)).each do |cal|
 		cal.events.each do |event|
 			events << event
@@ -24,7 +23,7 @@ require 'drb'
 
 DRb.start_service nil, events
 
-druby = File.join(conf_dir, "druby")
+druby = File.join(File.config_path("config"), "druby")
 
 f = File.open(druby, "w+")
 f.puts(DRb.uri.to_s)
