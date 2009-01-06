@@ -1,3 +1,4 @@
+desc 'Copy files to the configured directory'
 task :setup do
 	require 'lib/yaml'
 	unless File.exists? File.config_path("config")
