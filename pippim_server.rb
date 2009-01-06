@@ -9,10 +9,12 @@ require 'lib/yaml'
 unless File.exists?(File.config_path("config"))
 	puts "Please run `rake setup' before running this!"
 end
+Thread.abort_on_exception = true
 
-@events = []
+#@events = []
 #@events.extend DRb::DRbUndumped
 def load_cals
+	@events = []
 	Dir[File.join(File.config_path("calendars"), '*')].each do |calfile|
 		Icalendar.parse(File.read(calfile)).each do |cal|
 			cal.events.each do |event|
@@ -20,6 +22,17 @@ def load_cals
 			end
 		end
 	end
+
+	Icalendar.parse(File.read(File.config_path("personal_cal"))).each do |cal|
+		cal.events.each do |event|
+			@events << event
+		end
+	end
+#         Icalendar.parse(File.read(File.config_path("personal_cal.ics")).each do |cal|
+#                 cal.events.each do |event|
+#                         @events << event
+#                 end
+#         end
 	puts "Loaded calendars"
 	today = Date.today
 	@events.replace @events.map{|event| event.dtend.day if event.dtend and event.dtend.month == today.month }.select {|days| not days.nil? }.sort.uniq
