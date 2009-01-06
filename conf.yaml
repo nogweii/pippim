@@ -1,5 +1,8 @@
-# Relative to the user's home directory, e.g. $HOME
-config: .config/pippim
+# Path where the information PipPIM stores
+config: ~/.config/pippim
+
+# Besides config above, and configuration value about files can be relative
+# to config or be an absolute path.
 
 # The event template used when creating a new event (relative to config)
 template: event.template
@@ -7,5 +10,5 @@ template: event.template
 # The location of the calendars
 calendars: calendars
 
-# The name of the user's personal calendar (no file extensions)
-personal_cal: mine
+# File to store your own events (doesn't have to exist already)
+personal_cal: personal_cal.ics
