@@ -28,6 +28,7 @@ end
 
 DRb.start_service
 dates = DRbObject.new nil, File.readlines(druby).first
+p dates
 
 now   = Time.now
 month = now.month
@@ -48,4 +49,4 @@ end
 
 # wdays = Date::DAYNAMES.map{ |day| day[0..1] }.join(" ")
 puts now.strftime("%B %Y").center(20), "Su Mo Tu We Th Fr Sa", view
-
+puts dates.hash
