@@ -10,24 +10,26 @@ A todo list (using the iCal format as well)
 
 So far, this PIM suite only has a calendar.
 
+--------
+
 INFORMATION ABOUT THE CALENDAR:
 
 A ruby clone of the UNIX command cal.
-------
+=====================================
 
 This program is split into 2: A client and server.
 
 The server looks for all files with .ics as extensions in the folder calendars/ in the same directory as it is.
 The client connects to this server via DRb and generates the calendar itself in stdout. NOTE: require 'rubygems' is commented out in vpim_cal.rb due to the dramatic speed drop it introduces, to get the best performance out of PipPIM, run ruby with the -I parameter, e.g. "ruby -I/usr/lib/ruby/gems/1.8/gems/vpim-0.658/lib/ -I/usr/lib/ruby/gems/1.8/gems/facets-2.5.0/lib/more/"
 
-== Dependencies:
-VPIM [http://vpim.rubyforge.org]
+## Dependencies:
+[Icalendar](http://icalendar.rubyforge.org)
 
-== How to run vpim_cal:
+## How to run vpim_cal:
 Start the server:
   ruby pippim_server.rb
 And it will sit there, don't worry, it's running.
 
 Run the client:
   ruby cal.rb
-And out should pop a calendar
+And out should pop a calendar with the dates in the ics files highlighted!
