@@ -20,7 +20,6 @@ This program is split into 2: A client and server.
 
 The server looks for all files with .ics as extensions in the folder calendars/ in the same directory as it is.
 The client connects to this server via DRb and generates the calendar itself in stdout.
-*NOTE*: require 'rubygems' is commented out in cal.rb due to the dramatic speed drop it introduces, to get the best performance out of PipPIM, run ruby with the -I parameter, e.g. "ruby -I/usr/lib/ruby/gems/1.8/gems/icalendar-1.0.2"
 
 ## Dependencies:
  - [Icalendar](http://icalendar.rubyforge.org) (tested with version 1.0.2)
