@@ -14,12 +14,9 @@ EOHELP
 	exit 1
 end
 
-#require 'rubygems'
-#require 'vpim/repo'
 require 'date'
 require 'lib/ansicode'
 require 'drb'
-
 
 unless File.exists?(druby = File.join(ENV['HOME'], ".config", "pippim", "druby"))
 	puts "Start the PipPIM server before running this application!"
