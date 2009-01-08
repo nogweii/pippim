@@ -150,11 +150,12 @@
 #     on_cyan
 #     on_white
 #
-module ANSICode
-
-  extend self
   @@file = File.open("/tmp/ansi_code_methods.rb", "w")
-  
+  @@file.write <<-HERE
+module ANSICode
+  extend self
+HERE
+
   # Define color codes.
 
   def self.define_ansicolor_method(name,code)
@@ -193,5 +194,4 @@ module ANSICode
     define_ansicolor_method(c, v)
   end
 
-end
-
+@@file.puts "end"
