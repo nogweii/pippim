@@ -10,6 +10,10 @@ $YAML = YAML.load(File.read(File.expand_path(File.join(File.dirname(__FILE__), "
 # Using the YAML configuration file, gets the absolute path for a configuration
 # key.
 def File.config_path(key)
+	unless $YAML[key]
+		return File.join(File.config_path("config"), key.to_s)
+	end
+
 	if [?/, ?~].include? $YAML[key][0]
 		absolute = $YAML[key]
 	else

@@ -6,7 +6,7 @@ require 'rubygems'
 require 'icalendar'
 require 'chronic'
 require 'fileutils'
-require 'lib/yaml'
+require 'lib/config'
 require 'tempfile'
 
 # Copy the template to a tmp file & have the user edit it

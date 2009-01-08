@@ -4,7 +4,7 @@ require 'drb'
 require 'thread'
 require 'rubygems'
 require 'icalendar'
-require 'lib/yaml'
+require 'lib/config'
 
 unless File.exists?(File.config_path("config"))
 	puts "Please run `rake setup' before running this!"

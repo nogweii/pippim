@@ -18,8 +18,9 @@ end
 require 'date'
 require 'lib/ansicode'
 require 'drb'
+require 'lib/config'
 
-unless File.exists?(druby = File.join(ENV['HOME'], ".config", "pippim", "druby"))
+unless File.exists?(druby = File.config_path("druby"))
 	puts "Start the PipPIM server before running this application!"
 	exit 1
 end
