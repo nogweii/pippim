@@ -1,9 +1,9 @@
 #!/usr/bin/ruby
 
-if ARGV[0] == "-n"
+if ARGV.at 0 == "-n"
 	# Automatically starts due to no __FILE__ == $0 check
 	require 'lib/new_event'
-elsif %w[-help --help -h -?].include? ARGV[0]
+elsif %w[-help --help -h -?].include? ARGV.at 0
 	puts <<EOHELP
 #{$0} version 0.2
 A PipPIM DRb calendar client
@@ -46,6 +46,5 @@ dates.each do |date|
 	end
 end
 
-# wdays = Date::DAYNAMES.map{ |day| day[0..1] }.join(" ")
 puts now.strftime("%B %Y").center(20), "Su Mo Tu We Th Fr Sa", view
 
