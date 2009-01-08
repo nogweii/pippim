@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-if ARGV.at 0 == "-n"
+if ARGV.at(0) == "-n"
 	# Automatically starts due to no __FILE__ == $0 check
 	require 'lib/new_event'
 elsif %w[-help --help -h -?].include? ARGV.at 0
