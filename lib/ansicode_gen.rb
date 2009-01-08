@@ -153,122 +153,24 @@
 module ANSICode
 
   extend self
-
-  # Save current cursor positon.
-
-  def save
-    "\e[s"
-  end
-
-  # Restore saved cursor positon.
-
-  def restore
-    "\e[u"
-  end
-
-  # Clear the screen and move cursor to home.
-
-  def clear_screen
-    "\e[2J"
-  end
-  alias_method :cls, :clear_screen
-
-  # Clear to the end of the current line.
-
-  def clear_line
-    "\e[K"
-  end
-  alias_method :clr, :clear_line
-
-  #--
-  #def position
-  #  "\e[#;#R"
-  #end
-  #++
-
-  # Move curose to line and column.
-
-  def move( line, column=0 )
-    "\e[#{line.to_i};#{column.to_i}H"
-  end
-
-  # Move cursor up a specificed number of spaces.
-
-  def up( spaces=1 )
-    "\e[#{spaces.to_i}A"
-  end
-
-  # Move cursor down a specificed number of spaces.
-
-  def down( spaces=1 )
-    "\e[#{spaces.to_i}B"
-  end
-
-  # Move cursor left a specificed number of spaces.
-
-  def left( spaces=1 )
-    "\e[#{spaces.to_i}D"
-  end
-
-  # Move cursor right a specificed number of spaces.
-
-  def right( spaces=1 )
-    "\e[#{spaces.to_i}C"
-  end
-
-  # Like +move+ but returns to original positon
-  # after yielding block or adding string argument.
-
-  def display( line, column=0, string=nil ) #:yield:
-    result = "\e[s"
-    result << "\e[#{line.to_i};#{column.to_i}H"
-    if block_given?
-      result << yield
-      result << "\e[u"
-    elsif string
-      result << string
-      result << "\e[u"
-    elsif respond_to?(:to_str)
-      result << self
-      result << "\e[u"
-    end
-    return result
-  end
-
+  @@file = File.open("/tmp/ansi_code_methods.rb", "w")
+  
   # Define color codes.
 
   def self.define_ansicolor_method(name,code)
-    class_eval <<-HERE
+    @@file.write <<-HERE
       def #{name.to_s}(string = nil)
-          result = "\e[#{code}m"
-          if block_given?
-              result << yield
-              result << "\e[0m"
-          elsif string
-              result << string
-              result << "\e[0m"
-          elsif respond_to?(:to_str)
-              result << self
-              result << "\e[0m"
-          end
-          return result
+          "\e[#{code}m\#{string}\e[0m"
       end
     HERE
   end
 
   @@colors = [
-    [ :clear        ,   0 ],
     [ :reset        ,   0 ],     # synonym for :clear
     [ :bold         ,   1 ],
-    [ :dark         ,   2 ],
     [ :italic       ,   3 ],     # not widely implemented
-    [ :underline    ,   4 ],
     [ :underscore   ,   4 ],     # synonym for :underline
-    [ :blink        ,   5 ],
-    [ :rapid_blink  ,   6 ],     # not widely implemented
     [ :negative     ,   7 ],     # no reverse because of String#reverse
-    [ :concealed    ,   8 ],
-    [ :strikethrough,   9 ],     # not widely implemented
     [ :black        ,  30 ],
     [ :red          ,  31 ],
     [ :green        ,  32 ],
@@ -289,26 +191,6 @@ module ANSICode
 
   @@colors.each do |c, v|
     define_ansicolor_method(c, v)
-  end
-
-  ColoredRegexp = /\e\[([34][0-7]|[0-9])m/
-
-  def uncolored(string = nil)
-    if block_given?
-      yield.gsub(ColoredRegexp, '')
-    elsif string
-      string.gsub(ColoredRegexp, '')
-    elsif respond_to?(:to_str)
-      gsub(ColoredRegexp, '')
-    else
-      ''
-    end
-  end
-
-  module_function
-
-  def colors
-    @@colors.map { |c| c[0] }
   end
 
 end
