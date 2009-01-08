@@ -7,10 +7,10 @@ require 'icalendar'
 require 'chronic'
 require 'fileutils'
 require 'lib/yaml'
-require 'pp'
+require 'tempfile'
 
 # Copy the template to a tmp file & have the user edit it
-tmp_file = File.join(ENV['TMP'] || ENV['TEMP'] || "/tmp", "ical.event.#{$$}")
+tmp_file = Tempfile.open("pipcal").path
 FileUtils.cp File.config_path('template'), tmp_file
 system("#{ENV['EDITOR'] || 'vim'} #{tmp_file}")
 
@@ -70,4 +70,3 @@ cal_file.puts ical_string
 
 # Cleanup
 cal_file.close
-FileUtils.rm tmp_file

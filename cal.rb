@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+Thread.abort_on_exception = true
 
 if ARGV.at(0) == "-n"
 	# Automatically starts due to no __FILE__ == $0 check
@@ -42,6 +43,5 @@ dates.each do |date|
 		view.sub!(/#{date}/, ANSICode.red("#{date}"))
 	end
 end
-
 puts now.strftime("%B %Y").center(20), "Su Mo Tu We Th Fr Sa", view
 
