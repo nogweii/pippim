@@ -26,9 +26,13 @@ The client connects to this server via DRb and generates the calendar itself in 
 
 ## How to run pipcal:
 Start the server:
+
     ruby pippim_server.rb
+
 And it will sit there, don't worry, it's running.
 
 Run the client:
+
     ruby cal.rb
+
 And out should pop a calendar with the dates in the ics files highlighted!
