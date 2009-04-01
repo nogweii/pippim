@@ -28,9 +28,14 @@ def load_cals
 		end
 	end
 
-	puts "Loaded calendars"
 	today = Date.today
+	require 'pp'
+	require 'benchmark'
+	pp new_events.map {|event| ((event.dtstart || event.dtend-1)...(event.dtend || event.dtstart+1)).map {|day| day.day if day.month == today.month}.select { |day| day.is_a? Fixnum } }.flatten.sort.uniq
 	@events.replace new_events.map{|event| event.dtend.day if event.dtend and event.dtend.month == today.month }.select {|days| not days.nil? }.sort.uniq
+	pp @events
+
+	puts "Loaded calendars"
 end
 # Run it on start
 load_cals()

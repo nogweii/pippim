@@ -1,13 +1,13 @@
 #!/usr/bin/ruby
 
-# Sample code to take a file formatted similarly to event.template and create an iCalendar VEVENT (using the Icalendar library)
+# Takes a file modified by the user (from event.template) and creates an iCalendar VEVENT (using the Icalendar library)
 
-require 'rubygems'
-require 'icalendar'
-require 'chronic'
 require 'fileutils'
 require 'lib/config'
 require 'tempfile'
+require 'rubygems'
+require 'icalendar'
+require 'chronic'
 
 # Copy the template to a tmp file & have the user edit it
 tmp_file = Tempfile.open("pipcal").path

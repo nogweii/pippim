@@ -39,9 +39,9 @@ view  = str.gsub(/(.{20})./, "\\1\n")
 view.sub!(/#{now.strftime("%e")}/, ANSICode.negative(now.strftime('%e')))
 dates.each do |date|
 	if date < 10
-		view.sub!(/ #{date}/, ANSICode.red(" #{date}"))
+		view.sub!(" #{date}", ANSICode.red(" #{date}"))
 	else
-		view.sub!(/#{date}/, ANSICode.red("#{date}"))
+		view.sub!(date.to_s, ANSICode.red("#{date}"))
 	end
 end
 puts now.strftime("%B %Y").center(20), "Su Mo Tu We Th Fr Sa", view
