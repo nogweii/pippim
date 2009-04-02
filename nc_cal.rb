@@ -15,20 +15,16 @@ begin
 
 	# Quick calculations for the maximum/width height of both the main
 	# window, but also of the calendar itself.
-	width,height = [],[]
-	Ncurses.getmaxyx(window, height,width);
-	height,width = height[0],width[0]
-	calheight = height-4
-	starty = height-calheight
-	xinc = (width/7) # always 7 visible week days
+	calheight = Ncurses::LINES-4
+	starty = Ncurses::LINES-calheight
+	xinc = (Ncurses::COLS/7) # always 7 visible week days
 	yinc = (calheight)/6 # always 6 visible weeks
-
 
 	# Start the actual drawing
 	Ncurses.printmid(0, 0, "April 2009")
 	# Draw vertical lines (along the X axis)
 	wday = 1
-	while (xinc*wday) <= width
+	while (xinc*wday) <= Ncurses::COLS
 		Ncurses.mvvline(starty, (xinc*wday), 0, calheight-2) unless wday == 7
 		calwidth = (xinc*(wday-1))+1
 		Ncurses.printmid(3, calwidth, Date::DAYNAMES[wday-1], xinc)
