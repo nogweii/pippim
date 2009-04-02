@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 require 'ncurses'
-require 'lib/time_manager.rb'
+require 'lib/nccal/time_manager.rb'
 
 @Tm = NCCal::TimeManager.new
 
@@ -71,32 +71,4 @@ begin
 	end
 ensure
 	Ncurses.endwin(); # End curses mode
-end
-
-__END__
-
-	dayy = 2
-	current = first.dup
-	while (current.day <= last.day and current.month == last.month)
-		Ncurses.mvaddstr(dayy, dayx, ("%2d" % current.day))
-		dayx += xinc
-		if current.wday == 6
-			dayy += yinc
-			dayx = 1
-		end
-		current += 86400
-	end
-
-
-
-print "   " * first_padding
-current = first.dup
-while current.day <= last.day
-	print "%3s" % current.day
-	print "\n" if current.wday == 6
-	if current.day == last.day
-		puts "   " * (7-last.wday)
-		break
-	end
-	current += 86400
 end
