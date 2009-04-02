@@ -21,7 +21,7 @@ begin
 	yinc = (calheight)/6 # always 6 visible weeks
 
 	# Start the actual drawing
-	Ncurses.printmid(0, 0, "April 2009")
+	Ncurses.printmid(0, 0, "#{Date::MONTHNAMES[Tm.selected.month]} #{Tm.selected.year}")
 	# Draw vertical lines (along the X axis)
 	wday = 1
 	while (xinc*wday) <= Ncurses::COLS
