@@ -1,7 +1,7 @@
 require 'time'
 require 'date'
 
-module NCCal
+class NCCal
 	class TimeManager # < Struct.new(:now, :first, :last, :selected)
 		attr_reader :now, :weeks, :last, :first, :first_padding
 		attr_accessor :selected
