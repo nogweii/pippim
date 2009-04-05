@@ -1,7 +1,6 @@
 class NCCal
-	@Tm = NCCal::TimeManager.new
-
 	def setup
+		@Tm = NCCal::TimeManager.new
 		@window = Ncurses.initscr # Start curses mode
 		require 'lib/ncurses_exts.rb'
 		Ncurses.cbreak
@@ -32,7 +31,7 @@ class NCCal
 	def draw_dates
 		# Draw each date.
 		@dayy = @starty
-		@dayx = (@xinc * @Tm.first_padding) + 1
+		@dayx = (@xinc * @Tm.padding) + 1
 		@current = @Tm.first.dup
 		while (@current.day <= @Tm.last.day and @current.month == @Tm.last.month)
 			if @Tm.selected.day == @current.day
@@ -55,10 +54,6 @@ class NCCal
 	def loop
 		begin
 			setup
-			draw_lines
-			Ncurses.refresh
-			draw_dates
-			Ncurses.refresh
 
 			# Quick calculations for the maximum/width height of both the main
 			# window, but also of the calendar itself.
@@ -66,6 +61,11 @@ class NCCal
 			@starty = Ncurses::LINES-@calheight
 			@xinc = (Ncurses::COLS/7) # always 7 visible week days
 			@yinc = (@calheight)/6 # always 6 visible weeks
+
+			draw_lines
+			Ncurses.refresh
+			draw_dates
+			Ncurses.refresh
 
 			# Start the actual drawing
 			Ncurses.printmid(0, 0, "#{Date::MONTHNAMES[@Tm.selected.month]} #{@Tm.selected.year}")
