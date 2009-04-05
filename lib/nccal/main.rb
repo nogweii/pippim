@@ -42,6 +42,8 @@ class NCCal
 					change_date -7
 				when ?l
 					change_date  1
+				when ?t
+					@Tm.selected = Date.today
 				else
 					Ncurses.refresh
 				end
