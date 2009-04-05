@@ -14,7 +14,8 @@ class NCCal
 	def change_date(by)
 		@Tm.selected += by
 		if @Tm.first.month != @Tm.selected.month
-			@Tm.update @Tm.selected
+			clear_dates
+			@Tm.update @Tm.selected.to_time
 		end
 	end
 

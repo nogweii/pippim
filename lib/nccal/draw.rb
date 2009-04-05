@@ -18,30 +18,48 @@ class NCCal
 		end
 	end
 
+	# Draw each date.
 	def draw_dates
-		# Draw each date.
 		@dayy = @starty
 		@dayx = (@xinc * @Tm.padding) + 1
-		@current = @Tm.first.dup
-		while (@current.day <= @Tm.last.day and @current.month == @Tm.last.month)
-			if @Tm.selected.day == @current.day
+		current = @Tm.first.clone
+		while (current.day <= @Tm.last.day and current.month == @Tm.last.month)
+			if @Tm.selected.day == current.day
 				Ncurses.attron(Ncurses::A_REVERSE)
 			end
-			Ncurses.mvaddstr(@dayy, @dayx, ("%2s" % @current.day))
-			if @Tm.selected.day == @current.day
+			Ncurses.mvaddstr(@dayy, @dayx, ("%2s" % current.day))
+			if @Tm.selected.day == current.day
 				Ncurses.attroff(Ncurses::A_REVERSE)
 			end
-			@dayx = @xinc * (@current.wday+1) + 1
-			if @current.wday == 6
+			@dayx = @xinc * (current.wday+1) + 1
+			if current.wday == 6
 				@dayy += @yinc
 				@dayx = 2
 			end
-			@current += 86400
+			current += 86400
 		end
 
 	end
 
+	# Draw 2 spaces over where each date should have gone.
+	def clear_dates
+		@dayy = @starty
+		@dayx = (@xinc * @Tm.padding) + 1
+		current = @Tm.first.clone
+		while (current.day <= @Tm.last.day and current.month == @Tm.last.month)
+			Ncurses.mvaddstr(@dayy, @dayx, ("  " % current.day))
+			@dayx = @xinc * (current.wday+1) + 1
+			if current.wday == 6
+				@dayy += @yinc
+				@dayx = 2
+			end
+			current += 86400
+		end
+	end
+
 	def update
+		Ncurses.mvhline(0, 0, " "[0], Ncurses::COLS) # Remove the calendar header
+		# and then draw in the new, correct one.
 		Ncurses.printmid(0, 0, "#{Date::MONTHNAMES[@Tm.selected.month]} #{@Tm.selected.year}")
 		draw_lines
 		Ncurses.refresh

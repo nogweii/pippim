@@ -1,6 +1,24 @@
 require 'time'
 require 'date'
 
+class Time
+	# Converts a Time object to an instance of Date.
+	#
+	# Credit goes to the ActiveSupport team.
+	def to_date
+		::Date.new(year, month, day)
+	end
+end
+
+class Date
+	# Converts a Date object to an instance of Time.
+	#
+	# Credit goes to the ActiveSupport team.
+	def to_time(form = :local)
+		::Time.send("#{form}", year, month, day)
+	end
+end
+
 class NCCal
 	class TimeManager # < Struct.new(:now, :first, :last, :selected)
 		attr_reader :now, :weeks, :last, :first, :padding
@@ -11,6 +29,7 @@ class NCCal
 		end
 
 		def update(time)
+			raise ArgumentError, "Invalid parameter - TimeManager#update() requires an instance of Time" unless time.is_a? Time
 			@now = time
 			@last = (Time.mktime(@now.year+@now.month.div(12), (@now.month%12)+1, 1) - 86400)
 			@padding = (@last.wday - @last.day+1)%7
