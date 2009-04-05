@@ -52,7 +52,6 @@ class NCCal
 
 	end
 
-	public
 	def loop
 		begin
 			setup
@@ -85,6 +84,4 @@ class NCCal
 			Ncurses.endwin(); # End curses mode
 		end
 	end
-
-	public :loop
 end
