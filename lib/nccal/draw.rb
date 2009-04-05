@@ -40,4 +40,12 @@ class NCCal
 		end
 
 	end
+
+	def update
+		Ncurses.printmid(0, 0, "#{Date::MONTHNAMES[@Tm.selected.month]} #{@Tm.selected.year}")
+		draw_lines
+		Ncurses.refresh
+		draw_dates
+		Ncurses.refresh
+	end
 end

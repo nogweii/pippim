@@ -22,23 +22,22 @@ class NCCal
 			@xinc = (Ncurses::COLS/7) # always 7 visible week days
 			@yinc = (@calheight)/6 # always 6 visible weeks
 
-			draw_lines
-			Ncurses.refresh
-			draw_dates
-			Ncurses.refresh
-
-			# Start the actual drawing
-			Ncurses.printmid(0, 0, "#{Date::MONTHNAMES[@Tm.selected.month]} #{@Tm.selected.year}")
-
-			Ncurses.refresh(); # Print it on to the real screen
+			update
 
 			while ((ch = @window.getch()) != ?q) do
 				case ch
 				when ?h
-					# move left
+					@Tm.selected -= 1
+				when ?j
+					@Tm.selected += 7
+				when ?k
+					@Tm.selected -= 7
+				when ?l
+					@Tm.selected += 1
 				else
-					# default
+					Ncurses.refresh
 				end
+				update
 			end
 		ensure
 			Ncurses.endwin(); # End curses mode
