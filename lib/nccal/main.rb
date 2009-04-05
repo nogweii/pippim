@@ -11,6 +11,13 @@ class NCCal
 		Ncurses.curs_set(0) # Goodbye, cursor
 	end
 
+	def change_date(by)
+		@Tm.selected += by
+		if @Tm.first.month != @Tm.selected.month
+			@Tm.update @Tm.selected
+		end
+	end
+
 	def loop
 		begin
 			setup
@@ -27,13 +34,13 @@ class NCCal
 			while ((ch = @window.getch()) != ?q) do
 				case ch
 				when ?h
-					@Tm.selected -= 1
+					change_date -1
 				when ?j
-					@Tm.selected += 7
+					change_date  7
 				when ?k
-					@Tm.selected -= 7
+					change_date -7
 				when ?l
-					@Tm.selected += 1
+					change_date  1
 				else
 					Ncurses.refresh
 				end
