@@ -1,9 +1,10 @@
 require 'lib/nccal/draw.rb'
 
+Thread.abort_on_exception = true
 class NCCal
 	def setup
-		@Tm = NCCal::TimeManager.new
 		@window = Ncurses.initscr # Start curses mode
+		@Tm = NCCal::TimeManager.new 
 		require 'lib/ncurses_exts.rb'
 		Ncurses.cbreak
 		Ncurses.noecho
