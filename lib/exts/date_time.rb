@@ -185,3 +185,29 @@ module Merb
     end
   end
 end
+
+require 'date'
+
+class Time
+	# Converts a Time object to an instance of Date.
+	#
+	# Credit goes to the ActiveSupport team.
+	def to_date
+		::Date.new(year, month, day)
+	end
+end
+
+class Date
+	# Converts a Date object to an instance of Time.
+	#
+	# Credit goes to the ActiveSupport team.
+	def to_time(form = :local)
+		::Time.send("#{form}", year, month, day)
+	end
+
+	# Called by Runt, this is a simple compatibility layer with Time/Date
+	# conversion.
+	def to_date
+		self
+	end
+end

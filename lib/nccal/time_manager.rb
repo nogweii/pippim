@@ -1,24 +1,4 @@
 require 'time'
-require 'date'
-
-class Time
-	# Converts a Time object to an instance of Date.
-	#
-	# Credit goes to the ActiveSupport team.
-	def to_date
-		::Date.new(year, month, day)
-	end
-end
-
-class Date
-	# Converts a Date object to an instance of Time.
-	#
-	# Credit goes to the ActiveSupport team.
-	def to_time(form = :local)
-		::Time.send("#{form}", year, month, day)
-	end
-end
-
 class NCCal
 	class TimeManager # < Struct.new(:now, :first, :last, :selected)
 		attr_reader :now, :weeks, :last, :first, :padding
