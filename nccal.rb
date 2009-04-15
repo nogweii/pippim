@@ -6,7 +6,9 @@ rescue LoadError
 	require 'rubygems'
 	require 'ncurses'
 end
-require 'lib/nccal/time_manager.rb'
-require 'lib/nccal/main.rb'
+
+require 'exts/date_time'
+require 'nccal/time_manager'
+require 'nccal/main'
 
 NCCal.new.loop

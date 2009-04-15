@@ -7,3 +7,8 @@ task :setup do
 	cp "event.template", File.config_path("template")
 	cp_r "calendars", File.config_path("calendars")
 end
+
+desc 'Run nccal.rb with a modified library path'
+task :nccal do
+	exec "ruby -I#{File.join(Dir.pwd, 'lib')} nccal.rb"
+end

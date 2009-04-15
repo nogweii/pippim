@@ -1,11 +1,11 @@
-require 'lib/nccal/draw.rb'
+require 'nccal/draw'
 
 Thread.abort_on_exception = true
 class NCCal
 	def setup
 		@window = Ncurses.initscr # Start curses mode
 		@Tm = NCCal::TimeManager.new 
-		require 'lib/exts/ncurses.rb'
+		require 'exts/ncurses'
 		Ncurses.cbreak
 		Ncurses.noecho
 		Ncurses.keypad(@window, true)
