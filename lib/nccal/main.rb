@@ -5,7 +5,7 @@ class NCCal
 	def setup
 		@window = Ncurses.initscr # Start curses mode
 		@Tm = NCCal::TimeManager.new 
-		require 'lib/ncurses_exts.rb'
+		require 'lib/exts/ncurses.rb'
 		Ncurses.cbreak
 		Ncurses.noecho
 		Ncurses.keypad(@window, true)
